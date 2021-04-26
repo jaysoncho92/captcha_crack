@@ -42,7 +42,9 @@ for i, contour in enumerate(contours):  # 所有轮廓
         x, y, w, h = cv2.boundingRect(contour)  # 外接矩形
         print(x, y, w, h)
         cv2.rectangle(result, (x, y), (x + w, y + h), (0, 0, 255), 2)
+        cv2.imwrite('img/tencent_bg_detect_output.jpg', result)
         plt.imshow(result)
+        plt.title('detect output')
         plt.show()
         # 找到目标缺口，第一个可能是滑块
         # if x <= 200:
