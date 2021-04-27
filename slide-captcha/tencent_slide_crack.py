@@ -1,10 +1,10 @@
 # coding=utf-8
 """滑块验证码缺口位置定位"""
 """
-netease_bg.jpg滑块边缘颜色区分度不明显，边缘检测效果较差，无法形成封闭形状，此方法就行不通
+对于netease_bg.jpg滑块边缘颜色区分度不明显，边缘检测效果较差，
+无法形成封闭形状，此方法就行不通
 """
 import cv2
-import numpy as np
 import matplotlib.pyplot as plt
 
 # 1.读取图片
@@ -16,12 +16,6 @@ result = img.copy()
 blurred = cv2.GaussianBlur(img, (5, 5), 0)
 plt.imshow(blurred)
 plt.show()
-
-# 锐化
-# kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]], np.float32)
-# dst = cv2.filter2D(img, -1, kernel=kernel)
-# plt.imshow(dst)
-# plt.show()
 
 # 3.Canny边缘检测
 canny = cv2.Canny(blurred, 200, 400)
@@ -46,8 +40,5 @@ for i, contour in enumerate(contours):  # 所有轮廓
         plt.imshow(result)
         plt.title('detect output')
         plt.show()
-        # 找到目标缺口，第一个可能是滑块
-        # if x <= 200:
-        #     continue
         print('缺口位置：', x)
         break
